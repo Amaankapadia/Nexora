@@ -1585,3 +1585,165 @@ footer {
 .price:hover {
   border-color: rgba(120, 132, 255, 0.25);
 } 
+/* ================================
+   CONTACT FORM
+================================ */
+
+.contact-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(3, 4, 10, 0.78);
+  backdrop-filter: blur(18px);
+}
+
+.contact-modal {
+  position: relative;
+
+  width: min(520px, 100%);
+  padding: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 26px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(91, 102, 255, 0.15),
+      transparent 48%
+    ),
+    #0b0d15;
+
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.contact-modal h2 {
+  margin: 16px 0 10px;
+
+  font-size: clamp(34px, 5vw, 48px);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.contact-modal > p {
+  margin-bottom: 28px;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.contact-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-modal input,
+.contact-modal textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.035);
+  color: white;
+
+  outline: none;
+
+  font-family: inherit;
+  font-size: 15px;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.contact-modal input {
+  height: 54px;
+  padding: 0 16px;
+}
+
+.contact-modal textarea {
+  padding: 16px;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-modal input::placeholder,
+.contact-modal textarea::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.contact-modal input:focus,
+.contact-modal textarea:focus {
+  border-color: rgba(120, 130, 255, 0.55);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.contact-modal .primary {
+  margin-top: 6px;
+  justify-content: center;
+  width: 100%;
+}
+
+.contact-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+
+  width: 36px;
+  height: 36px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.contact-close:hover {
+  background: rgba(255, 255, 255, 0.09);
+  transform: rotate(90deg);
+}
+
+.contact-status {
+  margin: 4px 0 0 !important;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.65) !important;
+  font-size: 14px;
+}
+
+
+/* MOBILE CONTACT FORM */
+
+@media (max-width: 600px) {
+  .contact-overlay {
+    padding: 14px;
+  }
+
+  .contact-modal {
+    padding: 34px 22px 26px;
+    border-radius: 20px;
+  }
+
+  .contact-modal h2 {
+    font-size: 34px;
+  }
+}

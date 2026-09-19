@@ -51,6 +51,8 @@ const faqs = [
 ];
 
 function App() {
+  const [contactOpen, setContactOpen] = useState(false);
+  const [contactStatus, setContactStatus] = useState("");
   const [openFaq, setOpenFaq] = useState(0);
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -583,10 +585,108 @@ function App() {
             work only humans can do.
           </p>
 
-          <button className="primary" onClick={() => scrollTo("pricing")}>
+          <button
+            className="primary"
+            onClick={() => setContactOpen(true)}
+          >
             Start building with NEXORA ↗
           </button>
         </section>
+        {contactOpen && (
+          <div className="contact-overlay">
+            <div className="contact-modal">
+
+              <button
+                className="contact-close"
+                onClick={() => {
+                  setContactOpen(false);
+                  setContactStatus("");
+                }}
+              >
+                ×
+              </button>
+
+              <span className="section-label">GET STARTED</span>
+
+              <h2>Let's build something.</h2>
+
+              <p>
+                Tell us what you're building and we'll get back to you.
+              </p>
+
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setContactStatus("Sending...");
+
+                  const formData = new FormData(e.target);
+
+                  formData.append(
+                    "access_key",
+                    import.meta.env.VITE_WEB3FORMS_KEY
+                  );
+
+                  formData.append(
+                    "subject",
+                    "New NEXORA Contact Request"
+                  );
+
+                  const response = await fetch(
+                    "https://api.web3forms.com/submit",
+                    {
+                      method: "POST",
+                      body: formData,
+                    }
+                  );
+
+                  const result = await response.json();
+
+                  if (result.success) {
+                    setContactStatus("Message sent successfully! 🚀");
+                    e.target.reset();
+                  } else {
+                    setContactStatus(
+                      "Something went wrong. Please try again."
+                    );
+                  }
+                }}
+              >
+
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                />
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your email"
+                  required
+                />
+
+                <textarea
+                  name="message"
+                  placeholder="Tell us about your project..."
+                  rows="5"
+                  required
+                ></textarea>
+
+                <button type="submit" className="primary">
+                  Send message ↗
+                </button>
+
+                {contactStatus && (
+                  <p className="contact-status">
+                    {contactStatus}
+                  </p>
+                )}
+
+              </form>
+            </div>
+          </div>
+        )}
       </main>
 
       {/* FOOTER */}
@@ -641,7 +741,7 @@ function App() {
           </div>
         </div>
       </footer>
-    </div>
+    </div >
   );
 }
 
